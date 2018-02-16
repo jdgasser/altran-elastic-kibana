@@ -12,6 +12,7 @@ RUN mkdir -p /var/lock/apache2 /var/run/apache2
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client mysql-server
 
 # install MongoDB
+RUN mkdir -p /data/db
 RUN apt-get install -y mongodb mongodb-server mongodb-clients
 
 # install php
