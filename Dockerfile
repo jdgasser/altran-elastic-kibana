@@ -1,4 +1,4 @@
-﻿FROM ubuntu:16.04
+FROM ubuntu:16.04
 MAINTAINER Jean-Daniel Gasser <jean-daniel.gasser@altran.com>
 
 # Update sources
