@@ -50,6 +50,14 @@ WORKDIR /rancher-gitlab-deploy
 RUN python /rancher-gitlab-deploy/setup.py install
 RUN ln -s /usr/local/bin/rancher-gitlab-deploy /usr/local/bin/upgrade
 
+#install phpmyadmin
+RUN echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+RUN echo "phpmyadmin phpmyadmin/app-password-confirm password root" | debconf-set-selections
+RUN echo "phpmyadmin phpmyadmin/mysql/admin-pass password root" | debconf-set-selections
+RUN echo "phpmyadmin phpmyadmin/mysql/app-pass password root" | debconf-set-selections
+RUN echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+apt-get install -y phpmyadmin
+
 #Divers
 ADD script.sh /root/
 ADD key_rsa /root/
