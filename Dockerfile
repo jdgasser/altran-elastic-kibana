@@ -51,13 +51,7 @@ RUN python /rancher-gitlab-deploy/setup.py install
 RUN ln -s /usr/local/bin/rancher-gitlab-deploy /usr/local/bin/upgrade
 
 #install phpmyadmin
-RUN echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-RUN echo "phpmyadmin phpmyadmin/app-password-confirm password root" | debconf-set-selections
-RUN echo "phpmyadmin phpmyadmin/mysql/admin-pass password root" | debconf-set-selections
-RUN echo "phpmyadmin phpmyadmin/mysql/app-pass password root" | debconf-set-selections
-RUN echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
-RUN service mysql start
-RUN apt-get install -y phpmyadmin
+RUN apt-get install -y dbconfig-common dbconfig-mysql fontconfig-config fonts-dejavu-core javascript-common libfontconfig1 libfreetype6 libgd3 libjbig0 libjpeg-turbo8 libjpeg8 libjs-jquery libjs-sphinxdoc libjs-underscore libmcrypt4 libpng12-0 libtiff5 libvpx3 libxpm4 libxslt1.1 php-gd php-gettext php-mbstring php-mcrypt php-pear php-phpseclib php-tcpdf php-xml php7.0-gd php7.0-mbstring php7.0-mcrypt php7.0-xml
 
 #Divers
 ADD script.sh /root/
