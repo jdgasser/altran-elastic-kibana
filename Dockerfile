@@ -58,6 +58,7 @@ ADD script.sh /root/
 ADD key_rsa /root/
 ADD version.txt /root/
 ADD vhost_backend.conf /etc/apache2/sites-available/
+ADD .bashrc /root/
 EXPOSE 22 80 8080 3306
 
 #pour démarer les services et concerver le containeur ouvert
