@@ -56,7 +56,7 @@ RUN echo "phpmyadmin phpmyadmin/app-password-confirm password root" | debconf-se
 RUN echo "phpmyadmin phpmyadmin/mysql/admin-pass password root" | debconf-set-selections
 RUN echo "phpmyadmin phpmyadmin/mysql/app-pass password root" | debconf-set-selections
 RUN echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
-apt-get install -y phpmyadmin
+RUN apt-get install -y phpmyadmin
 
 #Divers
 ADD script.sh /root/
