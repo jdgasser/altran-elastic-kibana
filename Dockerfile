@@ -24,6 +24,9 @@ RUN apt-get install -y curl
 #install sudo
 RUN apt-get install -y sudo
 
+#install net-tools (netstat/ifconfig etc)
+RUN apt-get install -y net-tools
+
 # install nodejs 8.9.4 (dernière stable en 8.x)
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
