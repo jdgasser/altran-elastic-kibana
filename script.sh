@@ -4,6 +4,7 @@ chmod 0600 /root/key_rsa
 ssh-add /root/key_rsa
 	
 #Git 
+cd /home/
 git clone $URL_GIT
 
 #set hostname
