@@ -11,11 +11,15 @@ RUN apt-get install -y apt-transport-https software-properties-common wget
 #Install curl
 RUN apt-get install -y curl
 
-# Installation de Java 8
-RUN add-apt-repository -y ppa:webupd8team/java
-RUN apt-get update -y
-RUN apt-get install -y oracle-java8-installer
-# Installation du drivers Java msql
+# Install Java8.
+RUN \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
+ # Installation du drivers Java msql
 RUN apt-get install -y libmysql-java
 
 # install http
