@@ -72,7 +72,7 @@ RUN apt-get install -y dbconfig-common dbconfig-mysql fontconfig-config fonts-de
 #Divers
 ADD script.sh /root/
 ADD .bashrc /root/
-EXPOSE 22 80 8080 3306
+EXPOSE 22 80 3306
 
 #pour démarer les services et concerver le containeur ouvert
 CMD script.sh && /usr/sbin/sshd -D
