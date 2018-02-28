@@ -11,6 +11,9 @@ RUN apt-get install -y apt-transport-https software-properties-common wget
 #Install curl
 RUN apt-get install -y curl
 
+# Installation du drivers Java msql
+RUN apt-get install -y libmysql-java
+
 # Install Java8.
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -19,8 +22,7 @@ RUN \
   apt-get install -y oracle-java8-installer && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
- # Installation du drivers Java msql
-RUN apt-get install -y libmysql-java
+
 
 # install http
 RUN apt-get install -y apache2 vim bash-completion unzip
