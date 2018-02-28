@@ -14,16 +14,6 @@ RUN apt-get install -y curl
 # Installation du drivers Java msql
 RUN apt-get install -y libmysql-java
 
-# Install Java8.
-RUN \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
-
-
 # install http
 RUN apt-get install -y apache2 vim bash-completion unzip
 RUN mkdir -p /var/lock/apache2 /var/run/apache2
@@ -76,6 +66,15 @@ RUN ln -s /usr/local/bin/rancher-gitlab-deploy /usr/local/bin/upgrade
 #install le nécessaire pour phpmyadmin (phpmyadmin sera installé dans le script d'install.sh
 RUN apt-get install -y dbconfig-common dbconfig-mysql fontconfig-config fonts-dejavu-core javascript-common libfontconfig1 libfreetype6 libgd3 libjbig0 libjpeg-turbo8 libjpeg8 libjs-jquery libjs-sphinxdoc libjs-underscore libmcrypt4 libpng12-0 libtiff5 libvpx3 libxpm4 libxslt1.1 php-gd php-gettext php-mbstring php-mcrypt php-pear php-phpseclib php-tcpdf php-xml php7.0-gd php7.0-mbstring php7.0-mcrypt php7.0-xml
 
+# Install Java8.
+RUN \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
+  
 #Divers
 ADD script.sh /root/
 ADD .bashrc /root/
