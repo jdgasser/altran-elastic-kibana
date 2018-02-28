@@ -73,7 +73,8 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
   
-# Installer Logstash 
+# Installer Logstash
+RUN rm /etc/apt/sources.list.d/*
 RUN apt-get install -y logstash
   
 #Divers
