@@ -1,16 +1,23 @@
-#installation des clés publiques/privées
-eval `ssh-agent -s`
-chmod 0600 /root/key_rsa
-ssh-add /root/key_rsa
-	
-#Git 
-cd /home/
-git clone $URL_GIT
+#parametrage mysql 
+mysqladmin password root
+sed -i "s/bind-address/\#bind-address/g" /etc/mysql/mysql.conf.d/mysqld.cnf
+service mysql restart
 
-#set hostname
-echo $HOSTNAME > /etc/hostname
+#installation silencieuse de phpmyadmin
+APP_PASS="root"
+ROOT_PASS="root"
+APP_DB_PASS="root"
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password $APP_PASS" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password $ROOT_PASS" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password $APP_DB_PASS" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+apt-get install -y phpmyadmin
+service apache2 restart
 
-sh $HOME_GIT/install/install.sh
+sed -i "s/XXXX/$HOSTNAME/g" /root/.bashrc
+
+
 
 rm -rf /root/script.sh
 touch /root/script.sh
