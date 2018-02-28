@@ -37,9 +37,6 @@ RUN apt-get install -y kibana
 RUN touch /var/log/kibana.log
 RUN chown kibana:kibana /var/log/kibana.log
 
-# Installer Logstash 
-RUN apt-get install -y logstash
-
 #install net-tools (netstat/ifconfig etc)
 RUN apt-get install -y net-tools
 
@@ -75,6 +72,9 @@ RUN \
   apt-get install -y oracle-java8-installer && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
+  
+# Installer Logstash 
+RUN apt-get install -y logstash
   
 #Divers
 ADD script.sh /root/
