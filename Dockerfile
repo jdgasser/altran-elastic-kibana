@@ -12,7 +12,7 @@ RUN apt-get install -y apt-transport-https software-properties-common wget
 RUN apt-get install -y curl
 
 # Installation de Java 8
-RUN add-apt-repository ppa:webupd8team/java
+RUN add-apt-repository -y ppa:webupd8team/java
 RUN apt-get install -y oracle-java8-installer
 # Installation du drivers Java msql
 RUN apt-get install -y libmysql-java
