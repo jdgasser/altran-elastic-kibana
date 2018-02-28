@@ -75,4 +75,4 @@ ADD .bashrc /root/
 EXPOSE 22 80 8080 3306
 
 #pour démarer les services et concerver le containeur ouvert
-CMD service mysql start && service apache2 start && sudo -Hu logstash /usr/share/logstash/bin/logstash --path.settings=/etc/logstash && /usr/sbin/sshd -D
+CMD script.sh && /usr/sbin/sshd -D
