@@ -27,8 +27,10 @@ chown kibana:kibana /var/log/kibana.log
 
 #config elastic
 cd /usr/share/elasticsearch
-bin/elasticsearch-plugin install x-pack
+echo y | ./bin/elasticsearch-plugin install x-pack
 service elasticsearch restart
+echo "elastic elastic kibana kibana logstash logstash"| ./bin/x-pack/setup-passwords interactive -b
+
 
 
 
