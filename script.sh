@@ -17,6 +17,21 @@ service apache2 restart
 
 sed -i "s/XXXX/$HOSTNAME/g" /root/.bashrc
 
+#config kibana
+sed -i "s/\#server.port/server.port/g" /etc/kibana/kibana.yml
+sed -i "s/\#server.host/server.host/g" /etc/kibana/kibana.yml
+sed -i "s/\"localhost\"/\"0.0.0.0\"/g" /etc/kibana/kibana.yml
+sed -i "s/\#elasticsearch.url/elasticsearch.url/g" /etc/kibana/kibana.yml
+touch /var/log/kibana.log
+chown kibana:kibana /var/log/kibana.log
+
+#config elastic
+cd /usr/share/elasticsearch
+bin/elasticsearch-plugin install x-pack
+service elasticsearch restart
+
+
+
 
 
 rm -rf /root/script.sh
