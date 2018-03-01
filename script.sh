@@ -1,4 +1,5 @@
 #parametrage mysql 
+service mysql restart
 mysqladmin password root
 sed -i "s/bind-address/\#bind-address/g" /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
@@ -22,6 +23,8 @@ sed -i "s/\#server.port/server.port/g" /etc/kibana/kibana.yml
 sed -i "s/\#server.host/server.host/g" /etc/kibana/kibana.yml
 sed -i "s/\"localhost\"/\"0.0.0.0\"/g" /etc/kibana/kibana.yml
 sed -i "s/\#elasticsearch.url/elasticsearch.url/g" /etc/kibana/kibana.yml
+sed -i "s/\#elasticsearch.username\:\ \"user\"/\elasticsearch.username\:\ \"elastic\"/g" /etc/kibana/kibana.yml
+sed -i "s/\#elasticsearch.password\:\ \"user\"/\elasticsearch.password\:\ \"elastic\"/g" /etc/kibana/kibana.yml
 touch /var/log/kibana.log
 chown kibana:kibana /var/log/kibana.log
 
@@ -29,12 +32,8 @@ chown kibana:kibana /var/log/kibana.log
 cd /usr/share/elasticsearch
 echo y | ./bin/elasticsearch-plugin install x-pack
 service elasticsearch restart
-echo "elastic elastic kibana kibana logstash logstash"| ./bin/x-pack/setup-passwords interactive -b
-
-
-
-
-
+{ echo elastic && sleep 2 ; echo elastic && sleep 2; echo kibana && sleep 2; echo kibana && sleep 2; echo logstash && sleep 2; echo logstash && sleep 2; } | ./bin/x-pack/setup-passwords interactive -b
+service kibana restart
 
 rm -rf /root/script.sh
 touch /root/script.sh
