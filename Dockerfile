@@ -83,7 +83,7 @@ RUN chown kibana:kibana /var/log/kibana.log
 #Divers
 ADD script.sh /root/
 ADD .bashrc /root/
-EXPOSE 22 80 3306
+EXPOSE 22 80 443 9200 5106
 
 #pour démarer les services et concerver le containeur ouvert
 CMD script.sh && /usr/sbin/sshd -D
