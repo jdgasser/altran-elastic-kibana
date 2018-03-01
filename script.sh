@@ -35,5 +35,7 @@ service elasticsearch restart
 { echo elastic && sleep 2 ; echo elastic && sleep 2; echo kibana && sleep 2; echo kibana && sleep 2; echo logstash && sleep 2; echo logstash && sleep 2; } | ./bin/x-pack/setup-passwords interactive -b
 service kibana restart
 
+sed -i "s/PORT_MYSQL/'$PORT_MYSQL'/g" /etc/logstash/conf.d/logstash.conf
+
 rm -rf /root/script.sh
 touch /root/script.sh
