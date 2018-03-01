@@ -83,6 +83,7 @@ RUN chown kibana:kibana /var/log/kibana.log
 #Divers
 ADD script.sh /root/
 ADD .bashrc /root/
+ADD logstash.conf /etc/logstash/conf.d/
 EXPOSE 22 80 443 9200 5106
 
 #pour démarer les services et concerver le containeur ouvert
