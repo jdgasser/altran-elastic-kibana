@@ -24,18 +24,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client mysql-server
 # install php
 RUN apt-get install -y php7.0 php7.0-mysql libapache2-mod-php7.0 
 
-# Installation et configuration d' Elasticsearch 6.x
-# Ajout de la clé et du dépôt de package
-RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-RUN echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-6.x.list 
-RUN apt-get update
-
-RUN apt-get install -y elasticsearch
-
-# Installation et configuration de Kibana 6.x
-RUN apt-get install -y kibana
-RUN touch /var/log/kibana.log
-RUN chown kibana:kibana /var/log/kibana.log
 
 #install net-tools (netstat/ifconfig etc)
 RUN apt-get install -y net-tools
@@ -73,9 +61,24 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
   
+# Installation et configuration d' Elasticsearch 6.x
+# Ajout de la clé et du dépôt de package
+RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+RUN echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-6.x.list 
+RUN apt-get update
+
+RUN apt-get install -y elasticsearch
+
 # Installer Logstash
-RUN rm /etc/apt/sources.list.d/* && apt-get update
 RUN apt-get install -y logstash
+
+# Installation et configuration de Kibana 6.x
+RUN apt-get install -y kibana
+RUN touch /var/log/kibana.log
+RUN chown kibana:kibana /var/log/kibana.log
+
+  
+
   
 #Divers
 ADD script.sh /root/
