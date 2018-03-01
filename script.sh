@@ -32,6 +32,7 @@ chown kibana:kibana /var/log/kibana.log
 cd /usr/share/elasticsearch
 echo y | ./bin/elasticsearch-plugin install x-pack
 service elasticsearch restart
+sleep 15
 { echo elastic && sleep 2 ; echo elastic && sleep 2; echo kibana && sleep 2; echo kibana && sleep 2; echo logstash && sleep 2; echo logstash && sleep 2; } | ./bin/x-pack/setup-passwords interactive -b
 service kibana restart
 
